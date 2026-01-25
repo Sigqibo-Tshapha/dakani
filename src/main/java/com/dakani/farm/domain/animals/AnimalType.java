@@ -8,7 +8,8 @@ import java.util.Date;
 
 public enum AnimalType {
     BOVINE(1, "Bovine"),
-    SHEEP(2, "Sheep");
+    SHEEP(2, "Sheep"),
+    CHICKEN(3, "Chicken");
 
     private final int code;
     private final String displayName;
@@ -37,11 +38,11 @@ public enum AnimalType {
     }
 
     public static Animal createAnimal(int age, AnimalType type, LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan,
-                                      String name, Building building, String woolQuality) {
+                                      String name, Building building) {
         return switch (type) {
-            case BOVINE -> new Cow(age, dateOfPurchase, dateOfBirth, lifeSpan, name, building);
-            case SHEEP -> new Sheep(age, dateOfPurchase, dateOfBirth, lifeSpan, name, building, woolQuality);
+            case BOVINE -> new Cow(dateOfPurchase, dateOfBirth, lifeSpan, name, building);
+            case SHEEP -> new Sheep(dateOfPurchase, dateOfBirth, lifeSpan, name, building);
+            case CHICKEN -> new Chicken(dateOfPurchase, dateOfBirth, lifeSpan, name, building);
         };
     }
-
 }

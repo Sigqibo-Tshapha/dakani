@@ -4,7 +4,6 @@ import com.dakani.farm.domain.buildings.Building;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Any animal that classifies as livestock and needs to be tracked
@@ -16,7 +15,9 @@ public abstract class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     private long id;
-    private int age;
+
+    @Embedded
+    private AnimalTag tag;
 
     @Enumerated(EnumType.ORDINAL)
     private AnimalType type;
@@ -29,9 +30,8 @@ public abstract class Animal {
     @JoinColumn(name = "building_id")
     private Building hostBuilding;
 
-    public Animal(int age, AnimalType type, LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
+    public Animal(AnimalType type, LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
                   Building hostBuilding) {
-        this.age = age;
         this.type = type;
         this.dateOfPurchase = dateOfPurchase;
         this.dateOfBirth = dateOfBirth;
@@ -40,24 +40,12 @@ public abstract class Animal {
         this.hostBuilding = hostBuilding;
     }
 
-    public abstract LocalDate getSlaughterDate();
-
-    public abstract LocalDate getMatureDate();
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public AnimalType getType() {
@@ -100,17 +88,27 @@ public abstract class Animal {
         this.name = name;
     }
 
+    public Building getHostBuilding() {
+        return hostBuilding;
+    }
+
+    public void setHostBuilding(Building hostBuilding) {
+        this.hostBuilding = hostBuilding;
+    }
+
     @Override
     public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", age=" + age +
-                ", type=" + type +
-                ", dateOfPurchase=" + dateOfPurchase +
-                ", dateOfBirth=" + dateOfBirth +
-                ", lifeSpan=" + lifeSpan +
-                ", name='" + name + '\'' +
-                ", hostBuilding=" + hostBuilding +
-                '}';
+        return String.join(",", new String[] {
+                "id=" + id,
+                ", type=" + type,
+                ", dateOfPurchase=" + dateOfPurchase,
+                ", dateOfBirth=" + dateOfBirth,
+                ", lifeSpan=" + lifeSpan,
+                ", name='" + name,
+                ", hostBuilding=" + hostBuilding
+                });
     }
+
+    @Embeddable
+    public record AnimalTag(int birthYear, String sequenceNumber, String rfidCode){}
 }

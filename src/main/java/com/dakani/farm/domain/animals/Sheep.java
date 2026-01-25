@@ -11,26 +11,26 @@ import java.util.Objects;
 @DiscriminatorValue("SHEEP")
 public class Sheep extends Animal{
 
+
     private String woolQuality;
-    public Sheep(int age, LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
+
+    public Sheep(LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
+                 Building hostBuilding) {
+        super(AnimalType.BOVINE, dateOfPurchase, dateOfBirth, lifeSpan, name, hostBuilding);
+    }
+
+    public Sheep(LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
                  Building hostBuilding, String woolQuality) {
-        super(age, AnimalType.BOVINE, dateOfPurchase, dateOfBirth, lifeSpan, name, hostBuilding);
+        super(AnimalType.BOVINE, dateOfPurchase, dateOfBirth, lifeSpan, name, hostBuilding);
         this.woolQuality = woolQuality;
-
-    }
-
-    @Override
-    public LocalDate getSlaughterDate() {
-        return getMatureDate().plusDays(1);
-    }
-
-    @Override
-    public LocalDate getMatureDate() {
-        return this.getDateOfBirth().plusMonths(8);
     }
 
     public String getWoolQuality() {
         return woolQuality;
+    }
+
+    public void setWoolQuality(String woolQuality) {
+        this.woolQuality = woolQuality;
     }
 
     @Override
@@ -43,14 +43,14 @@ public class Sheep extends Animal{
 
     @Override
     public int hashCode() {
-        return Objects.hash(woolQuality);
+        return Objects.hash(super.hashCode(), woolQuality);
     }
 
     @Override
     public String toString() {
-        return "Sheep{" +
-                "woolQuality='" + woolQuality + '\'' +
-                ", " + super.toString() +
-                "} " ;
+        return String.join(",", new String[] {
+                "woolQuality='" + woolQuality,
+                super.toString()
+        });
     }
 }

@@ -8,6 +8,7 @@ class FarmApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("-------------->Farm loaded successfully.");
 	}
 
 }
