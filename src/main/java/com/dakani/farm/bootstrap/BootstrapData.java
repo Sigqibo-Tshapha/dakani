@@ -2,6 +2,7 @@ package com.dakani.farm.bootstrap;
 
 import com.dakani.farm.domain.animals.Animal;
 import com.dakani.farm.domain.animals.Chicken;
+import com.dakani.farm.domain.animals.Cow;
 import com.dakani.farm.domain.buildings.Building;
 import com.dakani.farm.domain.buildings.Coop;
 import com.dakani.farm.domain.buildings.Shed;
@@ -14,6 +15,9 @@ import java.time.LocalDate;
 
 @Component
 public class BootstrapData  implements CommandLineRunner {
+    /*
+    Spring auto-wires the repositories for us to use to create the entities we want
+     */
     private AnimalRepository animalRepository;
     private BuildingRespository buildingRespository;
 
@@ -25,6 +29,11 @@ public class BootstrapData  implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
+        NB: We need to first save the Building objects BEFORE the Animal objects because of the
+        @OneToMany(mappedBy = "hostBuilding") & @ManyToOne relationships
+         When saving the Animal to its repository, it first checks the Building being mapped to
+         */
         Building coop1 = new Coop("C1", 500, 500, null);
         Animal chic1 = new Chicken(LocalDate.now(), LocalDate.now(), 2, null, coop1);
         coop1.getAnimalsStored().add(chic1);
@@ -32,14 +41,15 @@ public class BootstrapData  implements CommandLineRunner {
         animalRepository.save(chic1);
 
         Building shed1 = new Shed("S1", 500, 50, null);
-        Animal bessy = new Chicken(LocalDate.now(), LocalDate.now(), 24, null, shed1);
+        Animal bessy = new Cow(LocalDate.now(), LocalDate.now(), 24, null, shed1);
         shed1.getAnimalsStored().add(bessy);
         buildingRespository.save(shed1);
         animalRepository.save(bessy);
 
         System.out.println("In BootstrapData");
-        System.out.println("Chicken count: " + coop1.getAnimalsStored().stream().count());
-        System.out.println("Cattle count: " + shed1.getAnimalsStored().stream().count());
+        System.out.println("Buildings count: " + buildingRespository.count());
+        System.out.println("Livestock count: " + animalRepository.count());
+        buildingRespository.findAll().forEach(b -> System.out.println(b.toString()));
 
     }
 }

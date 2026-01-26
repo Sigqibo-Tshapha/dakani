@@ -19,10 +19,13 @@ public abstract class Building {
     private String location;
     private double areaSqm;
     private double animalCapacity;
-
     @OneToMany(mappedBy = "hostBuilding")
     private Set<Animal> animalsStored = new HashSet<>();
 
+
+    protected Building() {
+        // Required by JPA
+    }
 
     public Building(String location, double areaSqm, double animalCapacity) {
         this.location = location;
@@ -68,5 +71,15 @@ public abstract class Building {
 
     public void setAnimalsStored(Set<Animal> animalsStored) {
         this.animalsStored = animalsStored;
+    }
+
+    @Override
+    public String toString() {
+        return String.join(",",
+                "id=" + id,
+                "location='" + location,
+                "areaSqm=" + areaSqm,
+                "animalCapacity=" + animalCapacity);
+//              +  ", animalsStored=" + animalsStored; lazy loaded!!!
     }
 }

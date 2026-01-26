@@ -14,6 +14,11 @@ public class Cow extends Animal{
     private LocalDate matureDate;
     private String region;
 
+    protected Cow() {
+        // Required by JPA
+    }
+
+
     public Cow(LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name, Building building) {
         super(AnimalType.BOVINE, dateOfPurchase, dateOfBirth, lifeSpan, name, building);
     }

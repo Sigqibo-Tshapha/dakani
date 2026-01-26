@@ -11,6 +11,10 @@ import java.util.Set;
 public class Shed extends Building{
     private int milkingStations;
 
+    protected Shed() {
+        // Required by JPA
+    }
+
     public Shed(String location, double areaSqm, double animalCapacity, Set<Animal> animalsStored) {
         super(location, areaSqm, animalCapacity);
     }
@@ -21,5 +25,11 @@ public class Shed extends Building{
 
     public void setMilkingStations(int milkingStations) {
         this.milkingStations = milkingStations;
+    }
+
+    public String toString() {
+        return String.join(", ",
+                super.toString(),
+                "milkingStations=" + milkingStations);
     }
 }

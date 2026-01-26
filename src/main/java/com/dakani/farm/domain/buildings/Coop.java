@@ -11,14 +11,17 @@ import java.util.Set;
 public class Coop extends Building{
     private int chicCapacity;
     private boolean chicReady;
-    private boolean nestingBoxCount;
+    private int nestingBoxCount;
+
+    protected Coop() {
+    }
 
     public Coop(String location, double areaSqm, double animalCapacity, Set<Animal> animalsStored) {
         super(location, areaSqm, animalCapacity);
     }
 
     public Coop(String location, double areaSqm, double animalCapacity, Set<Animal> animalsStored,
-                int chicCapacity, boolean chicReady, boolean nestingBoxCount) {
+                int chicCapacity, boolean chicReady, int nestingBoxCount) {
         super(location, areaSqm, animalCapacity);
         this.chicCapacity = chicCapacity;
         this.chicReady = chicReady;
@@ -41,12 +44,20 @@ public class Coop extends Building{
         this.chicReady = chicReady;
     }
 
-    public boolean isNestingBoxCount() {
+    public int isNestingBoxCount() {
         return nestingBoxCount;
     }
 
-    public void setNestingBoxCount(boolean nestingBoxCount) {
+    public void setNestingBoxCount(int nestingBoxCount) {
         this.nestingBoxCount = nestingBoxCount;
     }
 
+    @Override
+    public String toString() {
+        return String.join(", ",
+                super.toString(),
+                "chicCapacity=" + chicCapacity,
+                "chicReady=" + chicReady,
+                "nestingBoxCount=" + nestingBoxCount);
+    }
 }

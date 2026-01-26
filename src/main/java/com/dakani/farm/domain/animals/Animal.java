@@ -30,6 +30,9 @@ public abstract class Animal {
     @JoinColumn(name = "building_id")
     private Building hostBuilding;
 
+    protected Animal() {
+    }
+
     public Animal(AnimalType type, LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
                   Building hostBuilding) {
         this.type = type;

@@ -14,6 +14,10 @@ public class Sheep extends Animal{
 
     private String woolQuality;
 
+    protected Sheep() {
+        // Required by JPA
+    }
+
     public Sheep(LocalDate dateOfPurchase, LocalDate dateOfBirth, double lifeSpan, String name,
                  Building hostBuilding) {
         super(AnimalType.BOVINE, dateOfPurchase, dateOfBirth, lifeSpan, name, hostBuilding);
