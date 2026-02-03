@@ -17,6 +17,7 @@ public class AnimalController {
     @RequestMapping("/animals")
     public String getBooks(Model model) {
         model.addAttribute("animals", animalService.findAll());
+        // Spring web injects this animals html for us
         return "animals";
     }
 }

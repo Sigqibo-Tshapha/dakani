@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Farm management application</title>
+</head>
+<body>
+<h1>Animal List</h1>
+
+<table>
+    <tr>
+        <th>Animal</th>
+        <th>Purchase date</th>
+        <th>DOB</th>
+        <th>Name</th>
+        <th>Host</th>
+    </tr>
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.type}">Chicken</td>
+        <td th:text="${animal.dateOfPurchase}">01/01/2025</td>
+        <td th:text="${animal.dateOfBirth}">01/01/2025</td>
+        <td th:text="${animal.name}">Bessy</td>
+        <td th:text="${animal.hostBuilding.location}">Barn</td>
+    </tr>
+</table>
+
+</body>
+</html>

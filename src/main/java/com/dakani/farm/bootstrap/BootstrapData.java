@@ -34,14 +34,14 @@ public class BootstrapData  implements CommandLineRunner {
         @OneToMany(mappedBy = "hostBuilding") & @ManyToOne relationships
          When saving the Animal to its repository, it first checks the Building being mapped to
          */
-        Building coop1 = new Coop("C1", 500, 500, null);
-        Animal chic1 = new Chicken(LocalDate.now(), LocalDate.now(), 2, null, coop1);
+        Building coop1 = new Coop("Lot 0-0", 500, 500, null);
+        Animal chic1 = new Chicken(LocalDate.now(), LocalDate.now(), 2, "Cornish 1", coop1);
         coop1.getAnimalsStored().add(chic1);
         buildingRespository.save(coop1);
         animalRepository.save(chic1);
 
-        Building shed1 = new Shed("S1", 500, 50, null);
-        Animal bessy = new Cow(LocalDate.now(), LocalDate.now(), 24, null, shed1);
+        Building shed1 = new Shed("Lot 10-0", 500, 50, null);
+        Animal bessy = new Cow(LocalDate.now(), LocalDate.now(), 24, "Bessy 1", shed1);
         shed1.getAnimalsStored().add(bessy);
         buildingRespository.save(shed1);
         animalRepository.save(bessy);
