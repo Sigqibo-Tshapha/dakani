@@ -46,10 +46,10 @@ public class BootstrapData  implements CommandLineRunner {
         buildingRespository.save(shed1);
         animalRepository.save(bessy);
 
-        System.out.println("In BootstrapData");
-        System.out.println("Buildings count: " + buildingRespository.count());
-        System.out.println("Livestock count: " + animalRepository.count());
-        buildingRespository.findAll().forEach(b -> System.out.println(b.toString()));
+//        System.out.println("In BootstrapData");
+//        System.out.println("Buildings count: " + buildingRespository.count());
+//        System.out.println("Livestock count: " + animalRepository.count());
+//        buildingRespository.findAll().forEach(b -> System.out.println(b.toString()));
 
     }
 }

@@ -1,6 +1,7 @@
 package com.dakani.farm.controllers;
 
 import com.dakani.farm.services.AnimalService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,14 +11,13 @@ public class AnimalController {
 
     private final AnimalService animalService;
 
-    public AnimalController(AnimalService animalService) {
+    public AnimalController(@Qualifier("animalServiceSetterInj") AnimalService animalService) {
         this.animalService = animalService;
     }
 
     @RequestMapping("/animals")
-    public String getBooks(Model model) {
+    public String getAnimals(Model model) {
         model.addAttribute("animals", animalService.findAll());
-        // Spring web injects this animals html for us
         return "animals";
     }
 }
