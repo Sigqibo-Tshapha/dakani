@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Shipment management application</title>
+</head>
+<body>
+<h1>Vehicle List</h1>
+
+<table>
+    <tr>
+        <th>Vehicle id</th>
+        <th>Category</th>
+    </tr>
+    <tr th:each="vehicle : ${vehicle}">
+        <td th:text="${vehicle.id}">id</td>
+        <td th:text="${vehicle.category}">Category</td>
+    </tr>
+</table>
+
+</body>
+</html>
