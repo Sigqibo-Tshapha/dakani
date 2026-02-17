@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Primary
-@Service
+@Service("truckService")
 public class TruckVehicleServiceImpl implements IVehicleService{
 
     IVehicleRepository vehicleRepository;

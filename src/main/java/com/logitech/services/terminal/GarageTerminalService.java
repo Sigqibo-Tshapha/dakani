@@ -4,11 +4,12 @@ import com.logitech.domain.terminal.Terminal;
 import com.logitech.domain.terminal.exception.TerminalNotFoundException;
 import com.logitech.repositories.terminal.ITerminalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Profile({"prod", "default"})
 @Service
 public class GarageTerminalService implements ITerminalService{
     ITerminalRepository terminalRepository;
@@ -33,8 +34,8 @@ public class GarageTerminalService implements ITerminalService{
     }
 
     @Override
-    public Terminal saveTerminal(Terminal order) {
-        return null;
+    public Terminal saveTerminal(Terminal terminal) {
+        return terminalRepository.save(terminal);
     }
 
     @Override

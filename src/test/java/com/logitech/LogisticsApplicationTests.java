@@ -1,10 +1,13 @@
 package com.logitech;
 
+import com.logitech.services.terminal.DevTerminalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("dev")
 @SpringBootTest
 class LogisticsApplicationTests {
 
@@ -12,10 +15,9 @@ class LogisticsApplicationTests {
 	ApplicationContext applicationContext;
 
 	@Test
-	void testAnimalService() {
-
-//		AnimalService animalService = (AnimalService) applicationContext.getBean("animalServiceMain");
-//		System.out.println(animalService.findAll());
+	void testTerminalService() {
+		DevTerminalService terminalService = (DevTerminalService) applicationContext.getBean("DevTerminalService");
+		System.out.println(terminalService.findAll());
 	}
 
 	@Test

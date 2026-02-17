@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service("shipSeviceImpl")
+@Service("shipService")
 public class ShipVehicleServiceImpl implements IVehicleService{
     IVehicleRepository vehicleRepository;
 

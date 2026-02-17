@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 import static com.logitech.domain.terminal.TerminalState.OPERATIONAL;
 
 @Component
@@ -30,19 +32,18 @@ public class BootstrapData  implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Create terminal
-        Terminal homeBase = new Terminal(OPERATIONAL);
-        terminalService.saveTerminal(homeBase);
+        Terminal homeBase = new Terminal("Airport Industria", OPERATIONAL);
 
         // Add vehicles
         Vehicle.VehicleTag vehicleTag1 = new Vehicle.VehicleTag("LD76FF - GP", "19HDU3UHI2U3HEII3JJ");
         Vehicle truckOne = new Vehicle(VehicleType.TRUCK, vehicleTag1,
                 VehicleCategory.LONGHAUL, homeBase);
         homeBase.addVehicle(truckOne);
+        terminalService.saveTerminal(homeBase);
 
-        vehicleService.saveVehicle(truckOne);
-
-        System.out.println("Terminals from db: " + terminalService.findAll());
-        System.out.println("Vehicles from db: " + vehicleService.findAll());
+        System.out.println("BootstrapData::run():: Terminals= " + terminalService.findAll().stream()
+                .map(terminal -> terminal.toString())
+                .collect(Collectors.joining(",")));
 
     }
 }

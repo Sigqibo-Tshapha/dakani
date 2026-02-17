@@ -14,15 +14,18 @@ public class Terminal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String location;
+
     @Enumerated
     private TerminalState state;
 
-    @OneToMany(mappedBy = "baseTerminal")
+    @OneToMany(mappedBy = "baseTerminal", cascade = CascadeType.PERSIST)
     private List<Vehicle> vehicles = new ArrayList<>();
 
     public Terminal() {}
 
-    public Terminal(TerminalState state) {
+    public Terminal(String location, TerminalState state) {
+        this.location = location;
         this.state = state;
     }
 
@@ -35,7 +38,6 @@ public class Terminal {
         return "Terminal{"
                 + "id=" + id
                 + ", state=" + state
-                + ", vehicles=" + vehicles.stream().map(vehicle -> vehicle.toString()).collect(Collectors.joining(","))
                 + '}';
     }
 }
