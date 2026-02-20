@@ -36,6 +36,7 @@ public class Terminal {
     @Override
     public String toString() {
         return "Terminal{"
+                + "location=" + location
                 + "id=" + id
                 + ", state=" + state
                 + '}';

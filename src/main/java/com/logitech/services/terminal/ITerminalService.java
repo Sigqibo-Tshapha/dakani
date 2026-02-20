@@ -11,7 +11,7 @@ import java.util.List;
 public interface ITerminalService {
     public List<Terminal> findAll();
 
-    Terminal getTerminalById(int id) throws TerminalNotFoundException;
+    Terminal getTerminalById(Long id) throws TerminalNotFoundException;
 
     Terminal saveTerminal(Terminal order);
     Terminal updateTerminal(Terminal order);

@@ -25,7 +25,7 @@ public class GarageTerminalService implements ITerminalService{
     }
 
     @Override
-    public Terminal getTerminalById(int id) throws TerminalNotFoundException {
+    public Terminal getTerminalById(Long id) throws TerminalNotFoundException {
         Terminal t = terminalRepository.findById(Long.valueOf(id)).get();
         if (t.equals(null)) {
             throw new TerminalNotFoundException(id);
